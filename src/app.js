@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config')
+const SubscriptionService = require('./subscription-service')
 
 const app = express();
 
@@ -18,6 +19,15 @@ app.use(helmet());
 app.get('/', (req, res) => {
   res.send('Hello, world!');
 });
+
+app.get('/dashboard', (req, res, next) => {
+  const knexInstance = req.app.get('db')
+  SubscriptionService.getAllServices(knexInstance)
+    .then(services => {
+      res.json(services)
+    })
+    .catch(next)
+})
 
 app.use(function errorHandler(error, req, res, next) {
   let response
