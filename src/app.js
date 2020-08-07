@@ -7,6 +7,7 @@ const { NODE_ENV } = require('./config')
 const subscriptionsRouter = require('./subscriptions-router')
 const usersRouter = require('./users-router')
 const authRouter = require('./auth-router')
+const path = require('path');
 
 const app = express();
 
@@ -39,6 +40,11 @@ app.use(function errorHandler(error, req, res, next) {
   }
   res.status(500).json(response)
 })
+
+app.use(express.static('dist'));
+app.get('*', (request, response) => {
+  response.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
 
 
 module.exports = app;
