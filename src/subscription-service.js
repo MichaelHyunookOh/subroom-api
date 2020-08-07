@@ -53,6 +53,7 @@ const SubscriptionService = {
         'usr.id'
       )
       .where('usr.id', id)
+      .groupBy('sub.id', 'usr.id')
   },
 
 
