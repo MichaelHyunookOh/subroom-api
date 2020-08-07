@@ -4,9 +4,12 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config')
-const SubscriptionService = require('./subscription-service')
+const subscriptionsRouter = require('./subscriptions-router')
+const usersRouter = require('./users-router')
+const authRouter = require('./auth-router')
 
 const app = express();
+
 
 const morganOption = (NODE_ENV === 'production')
   ? 'tiny'
@@ -16,18 +19,15 @@ app.use(cors());
 app.use(morgan(morganOption));
 app.use(helmet());
 
-app.get('/', (req, res) => {
-  res.send('Hello, world!');
-});
+app.use('/api/subscriptions', subscriptionsRouter)
+app.use('/api/auth', authRouter)
+app.use('/api/users', usersRouter)
 
-app.get('/dashboard', (req, res, next) => {
-  const knexInstance = req.app.get('db')
-  SubscriptionService.getAllServices(knexInstance)
-    .then(services => {
-      res.json(services)
-    })
-    .catch(next)
-})
+
+
+
+
+
 
 app.use(function errorHandler(error, req, res, next) {
   let response

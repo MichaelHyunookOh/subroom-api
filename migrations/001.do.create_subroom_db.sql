@@ -1,3 +1,4 @@
+BEGIN;
 CREATE TYPE payment as ENUM (
     'Automatic',
     'Manual'
@@ -8,5 +9,8 @@ CREATE TABLE subscription (
     subscription_name TEXT NOT NULL,
     subscription_price DECIMAL(12,2) NOT NULL,
     category payment NOT NULL,
-    payment_date DATE NOT NULL
+    subscription_user_name TEXT,
+    subscription_password TEXT
 );
+
+COMMIT;
