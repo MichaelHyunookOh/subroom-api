@@ -7,7 +7,7 @@ const { NODE_ENV } = require('./config')
 const subscriptionsRouter = require('./subscriptions-router')
 const usersRouter = require('./users-router')
 const authRouter = require('./auth-router')
-const path = require('path');
+
 
 const app = express();
 

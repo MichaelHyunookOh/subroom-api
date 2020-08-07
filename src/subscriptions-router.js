@@ -4,7 +4,7 @@ const SubscriptionService = require('./subscription-service')
 const subscriptionsRouter = express.Router()
 const { requireAuth } = require('../middleware/jwt-auth')
 const jsonParser = express.json()
-const AuthService = require('./auth-service')
+
 
 
 
