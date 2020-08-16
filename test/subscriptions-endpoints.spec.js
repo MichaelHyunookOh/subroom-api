@@ -30,9 +30,13 @@ describe('Subscriptions endpoints', function() {
 
   describe(`GET /api/subscriptions`, () => {
     context(`Given no subscriptions`, () => {
+      beforeEach(() => 
+          helpers.seedUsers(db, testUsers)
+          )
       it(`responds with 200 and an empty list`, () => {
         return supertest(app)
           .get('/api/subscriptions')
+          .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
           .expect(200, [])
       })
     })
@@ -55,6 +59,7 @@ describe('Subscriptions endpoints', function() {
         )
         return supertest(app)
           .get('/api/subscriptions')
+          .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
           .expect(200, expectedSubscriptions)
       })
     })
@@ -110,8 +115,9 @@ describe('Subscriptions endpoints', function() {
       const newSubscription = {
         subscription_name: 'Android',
         subscription_price: '12.99',
+        subscription_user_name: 'appletree',
+        subscription_password: 'Apples123!',
         category: 'Automatic',
-        payment_date: '2020-07-31T07:00:00.000Z',
       }
       return supertest(app)
         .post('/api/subscriptions')
@@ -170,10 +176,14 @@ describe('Subscriptions endpoints', function() {
 
   describe(`DELETE /api/subscriptions/:subscription_id`, () => {
     context(`Given no subscriptions`, () => {
+      beforeEach(() => 
+          helpers.seedUsers(db, testUsers)
+          )
       it(`responds with 404`, () => {
         const subscriptionId = 123456
         return supertest(app)
           .delete(`/api/subscriptions/${subscriptionId}`)
+          .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
           .expect(404, { error: { message: `Subscription doesn't exist`} })
       })
     })
@@ -194,6 +204,7 @@ describe('Subscriptions endpoints', function() {
         const expectedSubscriptions = testSubscriptions.filter(subscription => subscription.id !== idToRemove)
         return supertest(app)
           .delete(`/api/subscriptions/${idToRemove}`)
+          .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
           .expect(204)
           .then(res => 
             supertest(app)
@@ -204,12 +215,16 @@ describe('Subscriptions endpoints', function() {
     })
   })
 
-  describe(`PATCH /api/subscriptions/:subscription_id`, () => {
+  describe.only(`PATCH /api/subscriptions/:subscription_id`, () => {
     context(`Given no subscriptions`, () => {
+      beforeEach(() => 
+          helpers.seedUsers(db, testUsers)
+          )
       it(`responds with 404`, () => {
         const subscriptionId = 123456
         return supertest(app)
           .patch(`/api/subscriptions/${subscriptionId}`)
+          .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
           .expect(404, { error: { message: `Subscription doesn't exist`} })
       })
     })
@@ -241,6 +256,7 @@ describe('Subscriptions endpoints', function() {
         }
         return supertest(app)
           .patch(`/api/subscriptions/${idToUpdate}`)
+          .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
           .send(updateSubscription)
           .expect(204)
           .then(res =>
@@ -254,6 +270,7 @@ describe('Subscriptions endpoints', function() {
         const idToUpdate = 2
         return supertest(app)
           .patch(`/api/subscriptions/${idToUpdate}`)
+          .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
           .send({ irrelevantField: 'foo' })
           .expect(400, {
             error: {
@@ -274,6 +291,7 @@ describe('Subscriptions endpoints', function() {
 
         return supertest(app)
           .patch(`/api/subscriptions/${idToUpdate}`)
+          .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
           .send({
             ...updateSubscription,
             fieldToIgnore: 'should not be in GET response'

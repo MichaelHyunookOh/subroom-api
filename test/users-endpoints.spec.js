@@ -23,7 +23,7 @@ describe('Users Endpoints', function() {
 
   afterEach('clean the table', () => db.raw('TRUNCATE subscription, subroom_users RESTART IDENTITY CASCADE'))
 
-  describe.only(`POST /api/users`, () => {
+  describe(`POST /api/users`, () => {
     context(`User Validation`, () => {
       beforeEach('insert users', () =>
         helpers.seedUsers(

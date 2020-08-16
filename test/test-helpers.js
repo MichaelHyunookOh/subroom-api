@@ -66,7 +66,7 @@ function makeExpectedSubscription(users, subscription=[]) {
     subscription_name: subscription.subscription_name,
     subscription_price: subscription.subscription_price,
     subscription_user_name: subscription.subscription_user_name,
-    subscription_password: subscription_password,
+    subscription_password: subscription.subscription_password,
     category: subscription.category,
     user: {
       id: user.id,
