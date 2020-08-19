@@ -17,14 +17,10 @@ const SubscriptionService = {
               'date_created', usr.date_created
             )
           ) AS "user"`
-        ),
+        )
       )
-      .leftJoin(
-        'subroom_users AS usr',
-        'sub.user_id',
-        'usr.id'
-      )
-      .groupBy('sub.id', 'usr.id')
+      .leftJoin('subroom_users AS usr', 'sub.user_id', 'usr.id')
+      .groupBy('sub.id', 'usr.id');
   },
 
   getSubscriptions(db, id) {
@@ -45,18 +41,12 @@ const SubscriptionService = {
               'date_created', usr.date_created
             )
           ) AS "user"`
-        ),
+        )
       )
-      .leftJoin(
-        'subroom_users AS usr',
-        'sub.user_id',
-        'usr.id'
-      )
+      .leftJoin('subroom_users AS usr', 'sub.user_id', 'usr.id')
       .where('usr.id', id)
-      .groupBy('sub.id', 'usr.id')
+      .groupBy('sub.id', 'usr.id');
   },
-
-
 
   getByIdPost(db, id) {
     return db
@@ -81,23 +71,19 @@ const SubscriptionService = {
           ) AS "user"`
         )
       )
-      .leftJoin(
-        'subroom_users AS usr',
-        'sub.user_id',
-        'usr.id',
-      )
+      .leftJoin('subroom_users AS usr', 'sub.user_id', 'usr.id')
       .where('sub.id', id)
-      .first()
+      .first();
   },
-  
+
   getById(db, id) {
     return SubscriptionService.getAllSubscriptions(db)
       .where('sub.id', id)
-      .first()
+      .first();
   },
 
   exampleSubscription(subscription) {
-    const { user } = subscription
+    const { user } = subscription;
     return {
       id: subscription.id,
       subscription_name: subscription.subscription_name,
@@ -109,35 +95,26 @@ const SubscriptionService = {
         id: user.id,
         user_name: user.user_name,
         date_created: new Date(user.date_created),
-      }
-    }
+      },
+    };
   },
-  
+
   insertSubscription(db, newSubscription) {
     return db
       .insert(newSubscription)
       .into('subscription')
       .returning('*')
       .then(([row]) => row)
-      .then(row =>
-        SubscriptionService.getById(db, row.id)
-        )
+      .then((row) => SubscriptionService.getById(db, row.id));
   },
-  
+
   updateSubscription(knex, id, newFields) {
-    return knex('subscription')
-      .where({ id })
-      .update(newFields);
+    return knex('subscription').where({ id }).update(newFields);
   },
-  
-  deleteSubscription(knex, id,) {
-    return knex('subscription')
-      .where({ id })
-      .delete()
+
+  deleteSubscription(knex, id) {
+    return knex('subscription').where({ id }).delete();
   },
 };
 
- 
-
-  
 module.exports = SubscriptionService;
