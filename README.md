@@ -22,7 +22,7 @@ LIVE LINK: https://subroom.vercel.app
 - the add subscription form allows you to input your subscription information
 - entering password and usernames are not required
 
-##### API Endpoints
+### API Endpoints
 
 
 TECHNOLOGIES USED
