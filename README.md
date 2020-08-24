@@ -76,7 +76,7 @@ Client Repo: https://github.com/thinkful-ei-panda/subroom-client
 
 
 
-TECHNOLOGIES USED
+### TECHNOLOGIES USED
 React
 Express
 CSS3
