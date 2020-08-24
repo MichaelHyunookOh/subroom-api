@@ -1,8 +1,6 @@
 LIVE LINK: https://subroom.vercel.app
 
-```
-hello
-```
+
 
 ![Alt text](https://github.com/thinkful-ei-panda/subroom-client/blob/master/Readmeimg/LangingPage.png)
 
@@ -23,6 +21,8 @@ hello
 
 - the add subscription form allows you to input your subscription information
 - entering password and usernames are not required
+
+##### API Endpoints
 
 
 TECHNOLOGIES USED
