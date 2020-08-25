@@ -1,5 +1,6 @@
-LIVE LINK: https://subroom.vercel.app
+# Subroom
 
+LIVE LINK: https://subroom.vercel.app
 
 
 
@@ -23,8 +24,59 @@ LIVE LINK: https://subroom.vercel.app
 - the add subscription form allows you to input your subscription information
 - entering password and usernames are not required
 
+## API Endpoints
+### Auth Endpoints
+#### Post
 
-TECHNOLOGIES USED
+/api/auth/login
+
+Returning users can login 
+
+Uses JWT Authentication
+
+### Users Endpoints
+#### Post
+
+/api/users
+
+Create a new account
+
+### Subscription Endpoints
+#### Get
+
+/api/subscriptions
+
+Fetches all of user's subscription data
+
+#### Post
+
+/api/subscriptions
+
+Creates new subscription for user's account
+
+#### Get
+
+/api/subscriptions/:subscription_id
+
+Fetched specific subscription
+
+#### Delete
+
+/api/subscription/:subscription_id
+
+Deletes selected subscription
+
+#### Patch
+
+/api/subscription/:subscription_id
+
+Updates the selected subscription with new information provided by user
+
+Client Repo: https://github.com/thinkful-ei-panda/subroom-client
+
+
+
+### TECHNOLOGIES USED
 React
 Express
 CSS3
