@@ -30,6 +30,7 @@ describe('Subscriptions endpoints', function () {
   describe(`GET /api/subscriptions`, () => {
     context(`Given no subscriptions`, () => {
       beforeEach(() => helpers.seedUsers(db, testUsers));
+      console.log(testUsers[0]);
       it(`responds with 200 and an empty list`, () => {
         return supertest(app)
           .get('/api/subscriptions')
