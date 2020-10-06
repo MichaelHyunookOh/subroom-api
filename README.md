@@ -2,15 +2,11 @@
 
 LIVE LINK: https://subroom.vercel.app
 
-
-
 ![Alt text](https://github.com/thinkful-ei-panda/subroom-client/blob/master/Readmeimg/LangingPage.png)
 
 - subroom is an app that allows user to make a secure account to store all of their subscription information in one place
 
-
 ![Alt text](https://github.com/thinkful-ei-panda/subroom-client/blob/master/Readmeimg/Login.png)
-
 
 - The login and register forms require a password with at least one uppercase and lowercase letter as well as a number and a special character.
 - passwords must but at least 5 characters long
@@ -25,16 +21,19 @@ LIVE LINK: https://subroom.vercel.app
 - entering password and usernames are not required
 
 ## API Endpoints
+
 ### Auth Endpoints
+
 #### Post
 
 /api/auth/login
 
-Returning users can login 
+Returning users can login
 
 Uses JWT Authentication
 
 ### Users Endpoints
+
 #### Post
 
 /api/users
@@ -42,6 +41,7 @@ Uses JWT Authentication
 Create a new account
 
 ### Subscription Endpoints
+
 #### Get
 
 /api/subscriptions
@@ -72,11 +72,10 @@ Deletes selected subscription
 
 Updates the selected subscription with new information provided by user
 
-Client Repo: https://github.com/thinkful-ei-panda/subroom-client
-
-
+Client Repo: https://github.com/MichaelHyunookOh/subroom-client
 
 ### TECHNOLOGIES USED
+
 React
 Express
 CSS3
