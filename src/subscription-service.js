@@ -48,6 +48,15 @@ const SubscriptionService = {
       .groupBy('sub.id', 'usr.id');
   },
 
+  getTotalPayments(db, id) {
+    return db
+      .from('subscription')
+      .select(db.raw('user_id, SUM (subscription_price) as total'))
+      .leftJoin('subroom_users', 'subscription.user_id', 'subroom_users.id')
+      .where('subroom_users.id', id)
+      .groupBy('subscription.user_id');
+  },
+
   getByIdPost(db, id) {
     return db
       .from('subscription AS sub')
@@ -96,6 +105,18 @@ const SubscriptionService = {
         user_name: user.user_name,
         date_created: new Date(user.date_created),
       },
+    };
+  },
+
+  exampleTotal(subscription) {
+    const { user } = subscription;
+    return {
+      user_id: subscription.user_id,
+      subscription_name: subscription.subscription_name,
+      total: subscription.total,
+      subscription_user_name: subscription.subscription_user_name,
+      subscription_password: subscription.subscription_password,
+      category: subscription.category,
     };
   },
 

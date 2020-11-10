@@ -8,7 +8,6 @@ const jsonParser = express.json();
 subscriptionsRouter
   .route('/')
   .get(requireAuth, (req, res, next) => {
-    console.log(req.user.id);
     SubscriptionService.getSubscriptions(req.app.get('db'), req.user.id)
       .then((subscription) => {
         res.json(subscription.map(SubscriptionService.exampleSubscription));
@@ -49,6 +48,15 @@ subscriptionsRouter
       })
       .catch(next);
   });
+
+subscriptionsRouter.route('/total').get(requireAuth, (req, res, next) => {
+  SubscriptionService.getTotalPayments(req.app.get('db'), req.user.id).then(
+    (total) => {
+      console.log(total);
+      res.json(total.map(SubscriptionService.exampleTotal));
+    }
+  );
+});
 
 subscriptionsRouter
   .route('/:subscription_id')
