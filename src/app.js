@@ -16,6 +16,10 @@ app.use(cors());
 app.use(morgan(morganOption));
 app.use(helmet());
 
+app.get('/', (req, res) => {
+  res.send('Hello, world!');
+});
+
 app.use('/api/subscriptions', subscriptionsRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
