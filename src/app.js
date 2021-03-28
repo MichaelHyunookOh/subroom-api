@@ -20,6 +20,10 @@ app.get('/', (req, res) => {
   res.send('Hello, world!');
 });
 
+app.get('/test', (req, res) => {
+  res.send('Testing testing');
+});
+
 app.use('/api/subscriptions', subscriptionsRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
